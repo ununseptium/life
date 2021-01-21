@@ -1,0 +1,4 @@
+.build/
+.vim/
+local_vimrc
+vim_startup.bat
