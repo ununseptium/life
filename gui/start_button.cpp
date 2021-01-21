@@ -1,0 +1,70 @@
+#include <start_button.h>
+
+static void read_cells(QGridLayout* cells_field, uint8_t* cells_arr){
+	uint32_t border_offset = 1;
+	uint32_t cells_row_count = cells_field->rowCount() - border_offset;
+	uint32_t cells_column_count = cells_field->columnCount() - border_offset;
+
+	for (int cell_row_index = 0; cell_row_index < cells_row_count; cell_row_index++){
+		for (int cell_column_index = 0; cell_column_index < cells_column_count; cell_column_index++){
+			cell* cur_cell = (cell*)(
+					cells_field->
+					itemAtPosition(cell_row_index + border_offset, cell_column_index + border_offset)->
+					widget()
+			);
+			if (cur_cell->get_state() == fill_state){
+				cells_arr[cells_row_count * cell_row_index + cell_column_index] = 1;
+			}else{
+				cells_arr[cells_row_count * cell_row_index + cell_column_index] = 0;
+			}
+		}
+	}
+}
+
+start_button::start_button(const QIcon &icon, QGridLayout *grid_layout, edit_cell_button **buttons, uint32_t buttons_count): 
+		QPushButton(icon, NULL, NULL){
+	cells_field = grid_layout;
+	buttons_arr = (edit_cell_button**)malloc(buttons_count * sizeof(edit_cell_button));
+	for (uint32_t button_index = 0; button_index < buttons_count; button_index++){
+		buttons_arr[button_index] = buttons[button_index];
+	}
+
+	this->buttons_count = buttons_count;
+	is_active = 0;
+}
+
+start_button::~start_button(){
+	free(buttons_arr);
+}
+
+bool start_button::event(QEvent *e){
+	if (e->type() == QEvent::MouseButtonPress){
+		QMouseEvent *me = dynamic_cast<QMouseEvent*>(e);
+		if (me != NULL && me->button() == Qt::LeftButton){
+			if (!is_active){
+				is_active = 1;
+				block_buttons();
+				uint16_t cells_count = (cells_field->rowCount() - 1) * (cells_field->columnCount() - 1);
+				uint8_t cells_arr[cells_count];
+				read_cells(cells_field, cells_arr);
+			}else{
+				is_active = 0;
+				unblock_buttons();
+			}
+		}
+	}
+	return QPushButton::event(e);
+}
+
+void start_button::block_buttons(){
+	for (uint32_t button_index = 0; button_index < buttons_count; button_index++){
+		buttons_arr[button_index]->set_checked(false);
+		buttons_arr[button_index]->set_checkable(0);
+	}
+}
+
+void start_button::unblock_buttons(){
+	for (uint32_t button_index = 0; button_index < buttons_count; button_index++){
+		buttons_arr[button_index]->set_checkable(1);
+	}
+}
