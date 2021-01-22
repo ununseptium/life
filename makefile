@@ -22,6 +22,9 @@ ARCH_LIBS := $(subst /,\,$(call rsearch,$(QT_PATH)/lib,*.a))
 GUI_SOURCES := $(call rsearch,./gui,*cpp)
 GUI_OBJECTS := $(subst .cpp,.o,$(subst ./,./.build/,$(GUI_SOURCES)))
 
+SRC_SOURCES := $(call rsearch,./src,*cpp)
+SRC_OBJECTS := $(subst .cpp,.o,$(subst ./,./.build/,$(SRC_SOURCES)))
+
 .PHONY: all
 
 all: build
@@ -32,10 +35,13 @@ build: $(TARGET) $(BUILD_RESOURCES)
 	set PATH=%TEMP_PATH%
 	set TEMP_PATH=
 
-$(TARGET): $(GUI_OBJECTS)
+$(TARGET): $(GUI_OBJECTS) $(SRC_OBJECTS)
 	g++ $(call win_form,$^) $(GUI_CXX_FLAGS_LINK) $(ARCH_LIBS) -o $(call win_form,$@)
 
 ./.build/gui/%.o: gui/%.cpp
+	g++ $(GUI_CXX_FLAGS_COMPILE) $(HEADERS) $(call win_form,$<) -o $(call win_form,$@)
+
+./.build/src/%.o: src/%.cpp
 	g++ $(GUI_CXX_FLAGS_COMPILE) $(HEADERS) $(call win_form,$<) -o $(call win_form,$@)
 
 .build/bin/resources/%:
