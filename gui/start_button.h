@@ -9,6 +9,7 @@
 #include <cell.h>
 #include <edit_cell_button.h>
 #include <stdint.h>
+#include <render.h>
 
 class start_button: public QPushButton{
 	private:
@@ -18,6 +19,7 @@ class start_button: public QPushButton{
 		edit_cell_button **buttons_arr;
 		uint32_t buttons_count;
 		uint32_t is_active;
+		HANDLE render_thread;
 
 	public:
 		start_button(const QIcon &icon, QGridLayout *grid_layout, edit_cell_button **buttons, uint32_t buttons_count);

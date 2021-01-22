@@ -31,6 +31,7 @@ start_button::start_button(const QIcon &icon, QGridLayout *grid_layout, edit_cel
 
 	this->buttons_count = buttons_count;
 	is_active = 0;
+	render_thread = NULL;
 }
 
 start_button::~start_button(){
@@ -47,9 +48,13 @@ bool start_button::event(QEvent *e){
 				uint16_t cells_count = (cells_field->rowCount() - 1) * (cells_field->columnCount() - 1);
 				uint8_t cells_arr[cells_count];
 				read_cells(cells_field, cells_arr);
+				render_thread = CreateThread(NULL, 0, test_thread_fnc, NULL, 0, NULL);
 			}else{
 				is_active = 0;
 				unblock_buttons();
+				DWORD ex_code;
+				GetExitCodeThread(render_thread, &ex_code);
+				TerminateThread(render_thread, ex_code);
 			}
 		}
 	}
