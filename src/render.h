@@ -12,4 +12,4 @@ struct render_info{
 }
 #endif
 
-DWORD test_thread_fnc(void* param);
+DWORD test_thread_fnc(struct render_info* ri);
