@@ -21,6 +21,28 @@ static void read_cells(QGridLayout* cells_field, uint8_t* cells_arr){
 	}
 }
 
+void write_cells(void *grid, uint8_t *cells_arr){
+	QGridLayout *cells_field = (QGridLayout*)grid;
+	uint32_t border_offset = 1;
+	uint32_t cells_row_count = cells_field->rowCount() - border_offset;
+	uint32_t cells_column_count = cells_field->columnCount() - border_offset;
+
+	for (int cell_row_index = 0; cell_row_index < cells_row_count; cell_row_index++){
+		for (int cell_column_index = 0; cell_column_index < cells_column_count; cell_column_index++){
+			cell* cur_cell = (cell*)(
+					cells_field->
+					itemAtPosition(cell_row_index + border_offset, cell_column_index + border_offset)->
+					widget()
+			);
+			if (cell_row_index * cells_row_count + cell_column_index == 1){
+				cur_cell->set_state(fill_state);
+			}else{
+				cur_cell->set_state(space_state);
+			}
+		}
+	}
+}
+
 start_button::start_button(const QIcon &icon, QGridLayout *grid_layout, edit_cell_button **buttons, uint32_t buttons_count): 
 		QPushButton(icon, NULL, NULL){
 	cells_field = grid_layout;
