@@ -70,7 +70,13 @@ bool start_button::event(QEvent *e){
 				uint16_t cells_count = (cells_field->rowCount() - 1) * (cells_field->columnCount() - 1);
 				uint8_t cells_arr[cells_count];
 				read_cells(cells_field, cells_arr);
-				render_thread = CreateThread(NULL, 0, test_thread_fnc, NULL, 0, NULL);
+				struct render_info *ri = (struct render_info*)malloc(sizeof(struct render_info));
+				ri->grid = cells_field;
+				ri->cells_count_width = cells_field->columnCount() - 1;
+				ri->cells_count_height = cells_field->rowCount() - 1;
+				ri->cells_array = cells_arr;
+				ri->update_grid_fnc = write_cells;
+				render_thread = CreateThread(NULL, 0, test_thread_fnc, render_info, 0, NULL);
 			}else{
 				is_active = 0;
 				unblock_buttons();
