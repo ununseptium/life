@@ -18,6 +18,7 @@ struct render_info{
 	uint8_t cells_count_height;
 	uint8_t *cells_array;
 	void *grid;
+	uint16_t latency;
 	void (*update_grid_fnc)(void* grid, uint8_t *cells_array);
 }
 #endif
