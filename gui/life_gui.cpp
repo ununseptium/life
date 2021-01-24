@@ -82,7 +82,7 @@ void create_gui(uint8_t cells_count_wi, uint8_t cells_count_he, uint16_t ms_dela
 
 	edit_cell_button *edit_buttons[] = {white_cell_button, black_cell_button};
 	QIcon start_icon = QIcon("resources\\start_button.svg");
-	start_button *sb = new start_button(start_icon, cells_field, edit_buttons, 2);
+	start_button *sb = new start_button(start_icon, cells_field, edit_buttons, 2, ms_delay);
 	sb->setFixedHeight(MANAGE_BUTTONS_HE);
 
 	QHBoxLayout *horizontal_layout = new QHBoxLayout();
