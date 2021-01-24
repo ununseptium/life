@@ -28,4 +28,8 @@ struct neighbors_cells{
 }
 #endif
 
+void get_neighbors_cells(
+		uint8_t *cells_array, uint32_t cell_index, struct neighbors_cells *nc,
+		uint8_t cell_count_width, uint8_t cells_count_height
+);
 DWORD render_cycle(struct render_info* ri);
