@@ -33,9 +33,10 @@ class start_button: public QPushButton{
 		uint32_t buttons_count;
 		uint32_t is_active;
 		HANDLE render_thread;
+		uint16_t latency;
 
 	public:
-		start_button(const QIcon &icon, QGridLayout *grid_layout, edit_cell_button **buttons, uint32_t buttons_count);
+		start_button(const QIcon &icon, QGridLayout *grid_layout, edit_cell_button **buttons, uint32_t buttons_count, uint16_t latency);
 		~start_button();
 
 	protected:

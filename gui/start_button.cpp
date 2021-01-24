@@ -43,7 +43,7 @@ void write_cells(void *grid, uint8_t *cells_arr){
 	}
 }
 
-start_button::start_button(const QIcon &icon, QGridLayout *grid_layout, edit_cell_button **buttons, uint32_t buttons_count): 
+start_button::start_button(const QIcon &icon, QGridLayout *grid_layout, edit_cell_button **buttons, uint32_t buttons_count, uint16_t latency): 
 		QPushButton(icon, NULL, NULL){
 	cells_field = grid_layout;
 	buttons_arr = (edit_cell_button**)malloc(buttons_count * sizeof(edit_cell_button));
@@ -54,6 +54,7 @@ start_button::start_button(const QIcon &icon, QGridLayout *grid_layout, edit_cel
 	this->buttons_count = buttons_count;
 	is_active = 0;
 	render_thread = NULL;
+	this->latency = latency;
 }
 
 start_button::~start_button(){
