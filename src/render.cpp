@@ -48,7 +48,7 @@ void get_neighbors_cells(
 		nc->neigh7 = cells_array[cell_index - 1];
 }
 
-uint32_t get_fill_neighbors_count(struct neighbors_cells nc){
+uint32_t get_fill_neighbors_cells_count(struct neighbors_cells nc){
 	uint32_t fill_neighbors_cells = 0;
 
 	if (nc.neigh0 == 1)
@@ -80,14 +80,14 @@ void calc_next_cells_array(uint8_t *cur_cells, uint8_t *next_cells, uint8_t cell
 				cells_count_width, cells_count_height
 		);
 
-		if (get_fill_neighbors_cells(cur_cell_neighbors) == 3 && cur_cells[cell_index] == 0)
+		if (get_fill_neighbors_cells_count(cur_cell_neighbors) == 3 && cur_cells[cell_index] == 0)
 			next_cells[cell_index] = 1;
-		else if(get_fill_neighbors_cells(cur_cell_neighbors) != 3 && cur_cells[cell_index] == 0)
-			next_cells[cell_index] = 0
+		else if(get_fill_neighbors_cells_count(cur_cell_neighbors) != 3 && cur_cells[cell_index] == 0)
+			next_cells[cell_index] = 0;
 		else if (
 					(
-							get_fill_neighbors_cells(cur_cell_neighbors) < 2 || 
-							get_fill_neighbors_cells(cur_cell_neighbors) > 3
+							get_fill_neighbors_cells_count(cur_cell_neighbors) < 2 || 
+							get_fill_neighbors_cells_count(cur_cell_neighbors) > 3
 					) && 
 					cur_cells[cell_index] == 1
 		)
