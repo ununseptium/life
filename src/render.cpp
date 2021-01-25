@@ -71,6 +71,32 @@ uint32_t get_fill_neighbors_count(struct neighbors_cells nc){
 	return fill_neighbors_cells;
 }
 
+void calc_next_cells_array(uint8_t *cur_cells, uint8_t *next_cells, uint8_t cells_count_width, uint8_t cells_count_height){
+	uint32_t cells_count = cells_count_width * cells_count_height;
+	struct neighbors_cells cur_cell_neighbors;
+	for (uint32_t cell_index = 0; cell_index < cells_count; cell_index++){
+		get_neighbors_cells(
+				cur_cells, cell_index, &cur_cell_neighbors, 
+				cells_count_width, cells_count_height
+		);
+
+		if (get_fill_neighbors_cells(cur_cell_neighbors) == 3 && cur_cells[cell_index] == 0)
+			next_cells[cell_index] = 1;
+		else if(get_fill_neighbors_cells(cur_cell_neighbors) != 3 && cur_cells[cell_index] == 0)
+			next_cells[cell_index] = 0
+		else if (
+					(
+							get_fill_neighbors_cells(cur_cell_neighbors) < 2 || 
+							get_fill_neighbors_cells(cur_cell_neighbors) > 3
+					) && 
+					cur_cells[cell_index] == 1
+		)
+			next_cells[cell_index] = 0;
+		else
+			next_cells[cell_index] = 1;
+	}
+}
+
 DWORD render_cycle(struct render_info* ri){
 	while(1){
 
