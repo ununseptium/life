@@ -2,10 +2,10 @@
 
 void get_neighbors_cells(
 		uint8_t *cells_array, uint32_t cell_index, struct neighbors_cells *nc,
-		uint8_t cell_count_width, uint8_t cells_count_height
+		uint8_t cells_count_width, uint8_t cells_count_height
 ){
-	uint8_t cell_row = cell_index / cell_count_width;
-	uint8_t cell_column = cell_index % cell_count_width;
+	uint8_t cell_row = cell_index / cells_count_width;
+	uint8_t cell_column = cell_index % cells_count_width;
 
 	if (cell_row == 0 || cell_column == 0)
 		nc->neigh0 = 0;
@@ -15,14 +15,14 @@ void get_neighbors_cells(
 	if (cell_row == 0)
 		nc->neigh1 = 0;
 	else
-		nc->neigh1 = cells_array[cell_index - cell_count_width];
+		nc->neigh1 = cells_array[cell_index - cells_count_width];
 
 	if (cell_row == 0 || cell_column == cells_count_width - 1)
 		nc->neigh2 = 0;
 	else
 		nc->neigh2 = cells_array[cell_index - cells_count_width + 1];
 
-	if (cell_column == cell_count_width - 1)
+	if (cell_column == cells_count_width - 1)
 		nc->neigh3 = 0;
 	else
 		nc->neigh3 = cells_array[cell_index + 1];
@@ -30,7 +30,7 @@ void get_neighbors_cells(
 	if (cell_row == cells_count_height - 1 || cell_column == cells_count_width - 1)
 		nc->neigh4 = 0;
 	else
-		nc->neigh4 = cells_array[cell_index + cell_count_width + 1];
+		nc->neigh4 = cells_array[cell_index + cells_count_width + 1];
 
 	if (cell_row == cells_count_height - 1)
 		nc->neigh5 = 0;
