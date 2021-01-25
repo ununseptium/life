@@ -69,7 +69,7 @@ bool start_button::event(QEvent *e){
 				is_active = 1;
 				block_buttons();
 				uint16_t cells_count = (cells_field->rowCount() - 1) * (cells_field->columnCount() - 1);
-				uint8_t cells_arr[cells_count];
+				uint8_t *cells_arr = (uint8_t*)malloc(cells_count);
 				read_cells(cells_field, cells_arr);
 				struct render_info *ri = (struct render_info*)malloc(sizeof(struct render_info));
 				ri->grid = cells_field;
@@ -85,6 +85,7 @@ bool start_button::event(QEvent *e){
 				DWORD ex_code;
 				GetExitCodeThread(render_thread, &ex_code);
 				TerminateThread(render_thread, ex_code);
+				free(((struct render_info*)thread_data)->cells_array);
 				free(thread_data);
 			}
 		}
