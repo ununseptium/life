@@ -12,7 +12,7 @@ struct render_info{
 	void *grid;
 	uint16_t latency;
 	void (*update_grid_fnc)(void* grid, uint8_t *cells_array);
-}
+};
 #endif
 
 #ifndef _NEIGHBORS_CELLS
@@ -27,7 +27,7 @@ struct neighbors_cells{
 	uint8_t neigh5;
 	uint8_t neigh6;
 	uint8_t neigh7;
-}
+};
 #endif
 
 void get_neighbors_cells(
