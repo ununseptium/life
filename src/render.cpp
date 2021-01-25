@@ -48,6 +48,29 @@ void get_neighbors_cells(
 		nc->neigh7 = cells_array[cell_index - 1];
 }
 
+uint32_t get_fill_neighbors_count(struct neighbors_cells nc){
+	uint32_t fill_neighbors_cells = 0;
+
+	if (nc.neigh0 == 1)
+		fill_neighbors_cells++;
+	if (nc.neigh1 == 1)
+		fill_neighbors_cells++;
+	if (nc.neigh2 == 1)
+		fill_neighbors_cells++;
+	if (nc.neigh3 == 1)
+		fill_neighbors_cells++;
+	if (nc.neigh4 == 1)
+		fill_neighbors_cells++;
+	if (nc.neigh5 == 1)
+		fill_neighbors_cells++;
+	if (nc.neigh6 == 1)
+		fill_neighbors_cells++;
+	if (nc.neigh7 == 1)
+		fill_neighbors_cells++;
+	
+	return fill_neighbors_cells;
+}
+
 DWORD render_cycle(struct render_info* ri){
 	while(1){
 
