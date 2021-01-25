@@ -34,6 +34,7 @@ class start_button: public QPushButton{
 		uint32_t buttons_count;
 		uint32_t is_active;
 		HANDLE render_thread;
+		void *thread_data;
 		uint16_t latency;
 
 	public:
