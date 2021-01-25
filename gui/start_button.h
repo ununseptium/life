@@ -20,7 +20,7 @@ struct render_info{
 	void *grid;
 	uint16_t latency;
 	void (*update_grid_fnc)(void* grid, uint8_t *cells_array);
-}
+};
 #endif
 
 void write_cells(void *grid, uint8_t *cells_arr);
