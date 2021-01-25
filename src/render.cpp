@@ -98,8 +98,16 @@ void calc_next_cells_array(uint8_t *cur_cells, uint8_t *next_cells, uint8_t cell
 }
 
 DWORD render_cycle(struct render_info* ri){
-	while(1){
+	uint32_t cells_count = ri->cells_count_width * ri->cells_count_height
+	uint8_t current_cells_arr[cells_count];
+	memcpy(current_cells_arr, ri->cells_array, cells_count);
+	uint8_t next_cells_arr[cells_count];
 
+	while(1){
+		calc_next_cells_array(current_cells_arr, next_cells_arr, cells_count);
+		memcpy(next_cells_arr, current_cells_arr, cells_count);
+		ri->update_grid_fnc(ri->grid, next_cells_arr);
+		Sleep(ri->latency);
 	}
 	return 0;
 }
