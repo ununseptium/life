@@ -34,7 +34,7 @@ void write_cells(void *grid, uint8_t *cells_arr){
 					itemAtPosition(cell_row_index + border_offset, cell_column_index + border_offset)->
 					widget()
 			);
-			if (cell_row_index * cells_row_count + cell_column_index == 1){
+			if (cells_arr[cell_row_index * cells_row_count + cell_column_index] == 1){
 				cur_cell->set_state(fill_state);
 			}else{
 				cur_cell->set_state(space_state);
