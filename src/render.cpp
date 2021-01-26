@@ -105,8 +105,8 @@ DWORD render_cycle(struct render_info* ri){
 
 	while(1){
 		calc_next_cells_array(current_cells_arr, next_cells_arr, ri->cells_count_width, ri->cells_count_height);
-		memcpy(next_cells_arr, current_cells_arr, cells_count);
-		ri->update_grid_fnc(ri->grid, next_cells_arr);
+		memcpy(current_cells_arr, next_cells_arr, cells_count);
+		ri->update_grid_fnc(ri->grid, current_cells_arr);
 		Sleep(ri->latency);
 	}
 	return 0;
