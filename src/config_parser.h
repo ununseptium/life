@@ -1,6 +1,7 @@
 #ifndef _CONFIG_PARSER_H
 #define _CONFIG_PARSER_H
 
+#include <errno.h>
 #include <stdint.h>
 #include <stdio.h>
 #include <string.h>

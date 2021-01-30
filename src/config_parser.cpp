@@ -21,8 +21,8 @@ uint32_t conf_parsing(uint8_t *width, uint8_t *height, uint16_t *time){
 			return 2;
 		}
 		
-		int value = atoi(tab_char + 1);
-		if (value == 0){
+		int value = strtol(tab_char + 1, (char**)NULL, 10);
+		if (value == 0 || errno == ERANGE){
 			fclose(config);
 			return 2;
 		}
