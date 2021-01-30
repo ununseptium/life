@@ -10,7 +10,7 @@ uint32_t conf_parsing(uint8_t *width, uint8_t *height, uint16_t *time){
 
 	char cur_str[255];
 	for (int i = 0; i < 3; i++){
-		if (fgets(cur_str, 255, conf) == NULL){
+		if (fgets(cur_str, 255, config) == NULL){
 			fclose(config);
 			return 2;
 		}
