@@ -27,11 +27,11 @@ uint32_t conf_parsing(uint8_t *width, uint8_t *height, uint16_t *time){
 			return 2;
 		}
 
-		if (strncmp("width"), cur_str, tab_char - cur_str){
+		if (strncmp("width", cur_str, strlen("width")) == 0){
 			*width = (uint8_t)value;
-		} else if (strncmp("height"), cur_str, tab_char - cur_str){
+		} else if (strncmp("height", cur_str, strlen("height")) == 0){
 			*height = (uint8_t)value;
-		} else if (strncmp("time"), cur_str, tab_char - cur_str){
+		} else if (strncmp("time", cur_str, strlen("time")) == 0){
 			*time = (uint16_t)value;
 		} else {
 			fclose(config);
