@@ -15,7 +15,7 @@ uint32_t conf_parsing(uint8_t *width, uint8_t *height, uint16_t *time){
 			return 2;
 		}
 
-		char *tab_char = strchr(cur_str, '\n');
+		char *tab_char = strchr(cur_str, '\t');
 		if (tab_char == NULL){
 			fclose(config);
 			return 2;
