@@ -24,6 +24,18 @@ int main (int argc, char** argv){
 		return 1;
 	}
 	
+	uint8_t width;
+	if (width_cl != 0) width = width_cl;
+	else width = width_conf;
+
+	uint8_t height;
+	if (height_cl != 0) height = height_cl;
+	else height = height_conf;
+
+	uint16_t time;
+	if (time_cl != 0) time = time_cl;
+	else time = time_conf;
+
 	event_loop el = init_event_loop(argv);
 	create_gui(10, 10, 0);
 	start_event_loop(el);
