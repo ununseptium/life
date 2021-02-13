@@ -37,7 +37,7 @@ int main (int argc, char** argv){
 	else time = time_conf;
 
 	event_loop el = init_event_loop(argv);
-	create_gui(10, 10, 0);
+	create_gui(width, height, time);
 	start_event_loop(el);
 	return 0;
 }
