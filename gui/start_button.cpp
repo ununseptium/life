@@ -78,7 +78,7 @@ bool start_button::event(QEvent *e){
 				ri->cells_array = cells_arr;
 				ri->latency = latency;
 				ri->update_grid_fnc = write_cells;
-				render_thread = CreateThread(NULL, 0, render_cycle, render_info, 0, NULL);
+				render_thread = CreateThread(NULL, 0, render_cycle, ri, 0, NULL);
 				thread_data = ri;
 			}else{
 				is_active = 0;
