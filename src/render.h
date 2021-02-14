@@ -36,4 +36,4 @@ void get_neighbors_cells(
 );
 uint32_t get_fill_neighbors_cells_count(struct neighbors_cells nc);
 void calc_next_cells_array(uint8_t *from, uint8_t *to, uint32_t size);
-DWORD render_cycle(struct render_info* ri);
+DWORD render_cycle(void* arg);

@@ -97,7 +97,8 @@ void calc_next_cells_array(uint8_t *cur_cells, uint8_t *next_cells, uint8_t cell
 	}
 }
 
-DWORD render_cycle(struct render_info* ri){
+DWORD render_cycle(void* arg){
+	struct render_info *ri = (render_info*)arg;
 	uint32_t cells_count = ri->cells_count_width * ri->cells_count_height;
 	uint8_t current_cells_arr[cells_count];
 	memcpy(current_cells_arr, ri->cells_array, cells_count);
