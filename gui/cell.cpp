@@ -13,6 +13,17 @@ void cell::set_clear_button(edit_cell_button *clear_button){
 	this->clear_button = clear_button;
 }
 
+void cell::mousePressEvent(QGraphicsSceneMouseEvent *event){
+	if (event->button() == Qt::LeftButton){
+		if (fill_button->isChecked() && get_state() != fill_state){
+			set_state(fill_state);
+		} else if (clear_button->isChecked() && get_state() != space_state){
+			set_state(space_state);
+		}
+	}
+
+	QGraphicsPixmapItem::mousePressEvent(event);
+}
 
 enum cell_state cell::get_state(){
 	return state;

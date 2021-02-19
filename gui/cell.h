@@ -3,6 +3,7 @@
 
 #include <QEvent>
 #include <QGraphicsPixmapItem>
+#include <QGraphicsSceneMouseEvent>
 #include <QGridLayout>
 #include <QGridLayout>
 #include <QLabel>
@@ -28,6 +29,7 @@ class cell: public QGraphicsPixmapItem{
 		void set_state(enum cell_state cs);
 	
 	protected:
+		void mousePressEvent(QGraphicsSceneMouseEvent *event) override;
 };
 
 #endif
