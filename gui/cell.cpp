@@ -13,19 +13,6 @@ void cell::set_clear_button(edit_cell_button *clear_button){
 	this->clear_button = clear_button;
 }
 
-bool cell::event(QEvent *e){
-	if (e->type() == QEvent::MouseButtonPress){
-		QMouseEvent *me = dynamic_cast<QMouseEvent*>(e);
-		if (me != NULL && me->button() == Qt::LeftButton){
-			if (fill_button->isChecked() && get_state() != fill_state){
-				set_state(fill_state);
-			} else if (clear_button->isChecked() && get_state() != space_state){
-				set_state(space_state);
-			}
-		}
-	}
-	return QLabel::event(e);
-}
 
 enum cell_state cell::get_state(){
 	return state;

@@ -28,7 +28,6 @@ class cell: public QGraphicsPixmapItem{
 		void set_state(enum cell_state cs);
 	
 	protected:
-		bool event(QEvent *e) override;
 };
 
 #endif
