@@ -1,6 +1,6 @@
 #include <cell.h>
 
-cell::cell(enum cell_state cs, uint32_t scale_value): QLabel() {
+cell::cell(enum cell_state cs, uint32_t scale_value): QGraphicsPixmapItem() {
 	this->scale_value = scale_value;
 	set_state(cs);
 }

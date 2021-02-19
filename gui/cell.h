@@ -2,6 +2,7 @@
 #define CELL_H
 
 #include <QEvent>
+#include <QGraphicsPixmapItem>
 #include <QGridLayout>
 #include <QGridLayout>
 #include <QLabel>
@@ -13,7 +14,7 @@
 
 enum cell_state {space_state, fill_state};
 
-class cell: public QLabel{
+class cell: public QGraphicsPixmapItem{
 	private:
 		edit_cell_button *fill_button;
 		edit_cell_button *clear_button;
