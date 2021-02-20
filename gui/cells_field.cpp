@@ -11,6 +11,8 @@ cells_field::cells_field(
 	border_offset_left = left_border->pixmap().width();
 	cells_w = cells_count_width;
 	cells_h = cells_count_height;
+	cell_width = up_border->pixmap().width();
+	cell_height = left_border->pixmap().height();
 
 	QGraphicsPixmapItem *local_start_border = new QGraphicsPixmapItem(start_border->pixmap());
 	local_start_border->setOffset((qreal)0, (qreal)0);
