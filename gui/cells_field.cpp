@@ -44,3 +44,8 @@ cell* cells_field::get_cell(uint8_t w, uint8_t h){
 			itemAt((qreal)(cell_width * w), (qreal)(cell_height * h), QTransform())
 	);
 }
+
+void cells_field::set_cell(cell *c, uint8_t w, uint8_t h){
+	c->setOffset((qreal)(cell_width * w), (qreal)(cell_height * h));
+	local_scene->addItem(c);
+}
