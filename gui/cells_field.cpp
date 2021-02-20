@@ -38,3 +38,9 @@ cells_field::cells_field(
 		local_scene->addItem(local_left_border);
 	}
 }
+
+cell* cells_field::get_cell(uint8_t w, uint8_t h){
+	return (cell*)(local_scene->
+			itemAt((qreal)(cell_width * w), (qreal)(cell_height * h), QTransform())
+	);
+}
