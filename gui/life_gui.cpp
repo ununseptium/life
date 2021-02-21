@@ -46,43 +46,37 @@ void create_gui(uint8_t cells_count_wi, uint8_t cells_count_he, uint16_t ms_dela
 
 	white_cell_button->add_button(black_cell_button);
 	black_cell_button->add_button(white_cell_button);
-	
-	QGridLayout *cells_field = new QGridLayout();
-	cells_field->setContentsMargins(0, 0, 0, 0);
-	cells_field->setSpacing(0);
-	uint32_t scale_val = find_scale_value(resolution_w, resolution_h, cells_count_wi, cells_count_he);
-	for (uint8_t row_index = 0; row_index < cells_count_he + 1; row_index++){
-		for (uint8_t column_index = 0; column_index < cells_count_wi + 1; column_index++){
-			uint32_t is_border = row_index == 0 || column_index == 0;
-			if (is_border){
-				QLabel *label = new QLabel();
-				QPixmap pixmap;
-				if (row_index == 0 && column_index == 0){
-					pixmap = QPixmap("resources\\start_border.svg");
-					pixmap = pixmap.scaled(START_BORDER_WI, START_BORDER_HE);
-				} else if (row_index == 0){
-					pixmap = QPixmap("resources\\up_border.svg");
-					pixmap = pixmap.scaled(UP_BORDER_WI, UP_BORDER_HE);
-				}else {
-					pixmap = QPixmap("resources\\left_border.svg");
-					pixmap = pixmap.scaled(LEFT_BORDER_WI, LEFT_BORDER_HE);
-				}
 
-				pixmap = pixmap.scaled(pixmap.width() * scale_val, pixmap.height() * scale_val);
-				label->setPixmap(pixmap);
-				cells_field->addWidget(label, row_index, column_index, (Qt::Alignment)0);
-			}else{
-				cell *cur_cell = new cell(space_state, scale_val);
-				cur_cell->set_fill_button(black_cell_button);
-				cur_cell->set_clear_button(white_cell_button);
-				cells_field->addWidget(cur_cell, row_index, column_index, (Qt::Alignment)0);
-			}
+	uint32_t scale_val = find_scale_value(resolution_w, resolution_h, cells_count_wi, cells_count_he);
+
+	QPixmap start_border_pixmap = QPixmap("resources\\start_border.svg");
+	start_border_pixmap = start_border_pixmap.scaled(START_BORDER_WI * scale_val, START_BORDER_HE * scale_val);
+	QGraphicsPixmapItem start_border_pixmap_item = QGraphicsPixmapItem(start_border_pixmap, NULL);
+
+	QPixmap up_border_pixmap = QPixmap("resources\\up_border.svg");
+	up_border_pixmap = up_border_pixmap.scaled(UP_BORDER_WI * scale_val, UP_BORDER_HE * scale_val);
+	QGraphicsPixmapItem up_border_pixmap_item = QGraphicsPixmapItem(up_border_pixmap, NULL);
+
+	QPixmap left_border_pixmap = QPixmap("resources\\left_border.svg");
+	left_border_pixmap = left_border_pixmap.scaled(LEFT_BORDER_WI * scale_val, LEFT_BORDER_HE * scale_val);
+	QGraphicsPixmapItem left_border_pixmap_item = QGraphicsPixmapItem(left_border_pixmap, NULL);
+
+	cells_field *cf = new cells_field(
+			cells_count_wi, cells_count_he, &start_border_pixmap_item, &left_border_pixmap_item, &up_border_pixmap_item
+	);
+
+	for (uint8_t row_index = 0; row_index < cells_count_he; row_index++){
+		for (uint8_t column_index = 0; column_index < cells_count_wi; column_index++){
+			cell *cur_cell = new cell(space_state, scale_val);
+			cur_cell->set_fill_button(black_cell_button);
+			cur_cell->set_clear_button(white_cell_button);
+			cf->set_cell(cur_cell, column_index, row_index);
 		}
 	}
 
 	edit_cell_button *edit_buttons[] = {white_cell_button, black_cell_button};
 	QIcon start_icon = QIcon("resources\\start_button.svg");
-	start_button *sb = new start_button(start_icon, cells_field, edit_buttons, 2, ms_delay);
+	start_button *sb = new start_button(start_icon, cf, edit_buttons, 2, ms_delay);
 	sb->setFixedHeight(MANAGE_BUTTONS_HE);
 
 	QHBoxLayout *horizontal_layout = new QHBoxLayout();
@@ -96,7 +90,7 @@ void create_gui(uint8_t cells_count_wi, uint8_t cells_count_he, uint16_t ms_dela
 	vertical_layout->setSpacing(0);
 	vertical_layout->setContentsMargins(0, 0, 0, 0);
 	vertical_layout->addLayout(horizontal_layout);
-	vertical_layout->addLayout(cells_field);
+	vertical_layout->addWidget(cf);
 
 	QWidget *window = new QWidget();
 	window->setLayout(vertical_layout);

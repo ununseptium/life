@@ -2,6 +2,7 @@
 #define LIFE_GUI_H
 
 #include <QApplication>
+#include <QGraphicsPixmapItem> 
 #include <QIcon>
 #include <QLayout>
 #include <QPalette>
@@ -14,6 +15,7 @@
 #include <QWidget>
 #include <Qt>
 #include <cell.h>
+#include <cells_field.h>
 #include <edit_cell_button.h>
 #include <start_button.h>
 #include <stdio.h>
