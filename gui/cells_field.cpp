@@ -33,7 +33,7 @@ cells_field::cells_field(
 		local_left_border = new QGraphicsPixmapItem(left_border->pixmap());
 		local_left_border->setOffset(
 				(qreal)0,
-				(qreal)(border_offset_up + up_border->pixmap().height() * left_border_index)
+				(qreal)(border_offset_up + left_border->pixmap().height() * left_border_index)
 		);
 		local_scene->addItem(local_left_border);
 	}
