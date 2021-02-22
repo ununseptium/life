@@ -24,7 +24,7 @@ struct render_info{
 };
 #endif
 
-void write_cells(void *grid, uint8_t *cells_arr);
+void write_cells(void *cf, uint8_t *cells_arr);
 
 class start_button: public QPushButton{
 	private:

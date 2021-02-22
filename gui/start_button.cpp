@@ -16,19 +16,13 @@ static void read_cells(cells_field* cf, uint8_t* cells_arr){
 	}
 }
 
-void write_cells(void *grid, uint8_t *cells_arr){
-	QGridLayout *cells_field = (QGridLayout*)grid;
-	uint32_t border_offset = 1;
-	uint32_t cells_row_count = cells_field->rowCount() - border_offset;
-	uint32_t cells_column_count = cells_field->columnCount() - border_offset;
+void write_cells(void *cf, uint8_t *cells_arr){
+	uint32_t cells_row_count = ((cells_field*)cf)->vertical_cells_count();
+	uint32_t cells_column_count = ((cells_field*)cf)->horizontal_cells_count();
 
 	for (int cell_row_index = 0; cell_row_index < cells_row_count; cell_row_index++){
 		for (int cell_column_index = 0; cell_column_index < cells_column_count; cell_column_index++){
-			cell* cur_cell = (cell*)(
-					cells_field->
-					itemAtPosition(cell_row_index + border_offset, cell_column_index + border_offset)->
-					widget()
-			);
+			cell* cur_cell = ((cells_field*)cf)->get_cell(cell_column_index, cell_row_index);
 			if (cells_arr[cell_row_index * cells_row_count + cell_column_index] == 1){
 				cur_cell->set_state(fill_state);
 			}else{
