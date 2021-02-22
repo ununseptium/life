@@ -7,6 +7,7 @@
 #include <QPushButton>
 #include <Qt>
 #include <cell.h>
+#include <cells_field.h>
 #include <edit_cell_button.h>
 #include <stdint.h>
 #include <render.h>
@@ -29,7 +30,7 @@ class start_button: public QPushButton{
 	private:
 		void block_buttons();
 		void unblock_buttons();
-		QGridLayout *local_cells_field;
+		cells_field *local_cells_field;
 		edit_cell_button **buttons_arr;
 		uint32_t buttons_count;
 		uint32_t is_active;
@@ -38,7 +39,7 @@ class start_button: public QPushButton{
 		uint16_t latency;
 
 	public:
-		start_button(const QIcon &icon, QGridLayout *grid_layout, edit_cell_button **buttons, uint32_t buttons_count, uint16_t latency);
+		start_button(const QIcon &icon, cells_field *cf, edit_cell_button **buttons, uint32_t buttons_count, uint16_t latency);
 		~start_button();
 
 	protected:
