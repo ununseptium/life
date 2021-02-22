@@ -1,17 +1,12 @@
 #include <start_button.h>
 
-static void read_cells(QGridLayout* cells_field, uint8_t* cells_arr){
-	uint32_t border_offset = 1;
-	uint32_t cells_row_count = cells_field->rowCount() - border_offset;
-	uint32_t cells_column_count = cells_field->columnCount() - border_offset;
+static void read_cells(cells_field* cf, uint8_t* cells_arr){
+	uint32_t cells_row_count = cf->vertical_cells_count();
+	uint32_t cells_column_count = cf->horizontal_cells_count();
 
 	for (int cell_row_index = 0; cell_row_index < cells_row_count; cell_row_index++){
 		for (int cell_column_index = 0; cell_column_index < cells_column_count; cell_column_index++){
-			cell* cur_cell = (cell*)(
-					cells_field->
-					itemAtPosition(cell_row_index + border_offset, cell_column_index + border_offset)->
-					widget()
-			);
+			cell* cur_cell = cf->get_cell(cell_column_index, cell_row_index);
 			if (cur_cell->get_state() == fill_state){
 				cells_arr[cells_row_count * cell_row_index + cell_column_index] = 1;
 			}else{
