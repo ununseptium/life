@@ -29,7 +29,7 @@ class start_button: public QPushButton{
 	private:
 		void block_buttons();
 		void unblock_buttons();
-		QGridLayout *cells_field;
+		QGridLayout *local_cells_field;
 		edit_cell_button **buttons_arr;
 		uint32_t buttons_count;
 		uint32_t is_active;

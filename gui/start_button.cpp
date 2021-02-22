@@ -45,7 +45,7 @@ void write_cells(void *grid, uint8_t *cells_arr){
 
 start_button::start_button(const QIcon &icon, QGridLayout *grid_layout, edit_cell_button **buttons, uint32_t buttons_count, uint16_t latency): 
 		QPushButton(icon, NULL, NULL){
-	cells_field = grid_layout;
+	local_cells_field = grid_layout;
 	buttons_arr = (edit_cell_button**)malloc(buttons_count * sizeof(edit_cell_button));
 	for (uint32_t button_index = 0; button_index < buttons_count; button_index++){
 		buttons_arr[button_index] = buttons[button_index];
@@ -68,13 +68,13 @@ bool start_button::event(QEvent *e){
 			if (!is_active){
 				is_active = 1;
 				block_buttons();
-				uint16_t cells_count = (cells_field->rowCount() - 1) * (cells_field->columnCount() - 1);
+				uint16_t cells_count = (local_cells_field->rowCount() - 1) * (local_cells_field->columnCount() - 1);
 				uint8_t *cells_arr = (uint8_t*)malloc(cells_count);
-				read_cells(cells_field, cells_arr);
+				read_cells(local_cells_field, cells_arr);
 				struct render_info *ri = (struct render_info*)malloc(sizeof(struct render_info));
-				ri->grid = cells_field;
-				ri->cells_count_width = cells_field->columnCount() - 1;
-				ri->cells_count_height = cells_field->rowCount() - 1;
+				ri->grid = local_cells_field;
+				ri->cells_count_width = local_cells_field->columnCount() - 1;
+				ri->cells_count_height = local_cells_field->rowCount() - 1;
 				ri->cells_array = cells_arr;
 				ri->latency = latency;
 				ri->update_grid_fnc = write_cells;
