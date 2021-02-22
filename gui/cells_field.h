@@ -24,6 +24,7 @@ class cells_field: public QGraphicsView{
 		cell* get_cell(uint8_t w, uint8_t h);
 		void set_cell(cell* c, uint8_t w, uint8_t h);
 		uint8_t vertical_cells_count();
+		uint8_t horizontal_cells_count();
 };
 
 #endif

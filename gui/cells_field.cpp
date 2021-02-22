@@ -53,3 +53,7 @@ void cells_field::set_cell(cell *c, uint8_t w, uint8_t h){
 uint8_t cells_field::vertical_cells_count(){
 	return cells_h;
 }
+
+uint8_t cells_field::horizontal_cells_count(){
+	return cells_w;
+}
