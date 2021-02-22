@@ -49,3 +49,7 @@ void cells_field::set_cell(cell *c, uint8_t w, uint8_t h){
 	c->setOffset((qreal)(cell_width * w) + border_offset_left, (qreal)(cell_height * h) + border_offset_up);
 	local_scene->addItem(c);
 }
+
+uint8_t cells_field::vertical_cells_count(){
+	return cells_h;
+}
